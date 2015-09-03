@@ -1,7 +1,7 @@
 # mseapca
 R package for statististical analysis in metabolomics
 
-CRANから直接ダウロードできます
+CRANから直接ダウロードできます<BR>
 https://cran.r-project.org/web/packages/mseapca/index.html
 
 論文はこちら<BR>
