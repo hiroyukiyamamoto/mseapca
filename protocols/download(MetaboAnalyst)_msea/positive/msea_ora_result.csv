@@ -1,0 +1,41 @@
+"","total","expected","hits","Raw p","Holm p","FDR"
+"Vitamin B6 Metabolism",3,0.444,2,0.0577,1,1
+"Purine Metabolism",22,3.26,5,0.206,1,1
+"Fatty Acid Biosynthesis",6,0.889,2,0.217,1,1
+"Phosphatidylethanolamine Biosynthesis",6,0.889,2,0.217,1,1
+"Betaine Metabolism",12,1.78,3,0.254,1,1
+"Phospholipid Biosynthesis",7,1.04,2,0.277,1,1
+"Sphingolipid Metabolism",8,1.19,2,0.337,1,1
+"Beta Oxidation of Very Long Chain Fatty Acids",8,1.19,2,0.337,1,1
+"Phosphatidylcholine Biosynthesis",8,1.19,2,0.337,1,1
+"Sulfate/Sulfite Metabolism",3,0.444,1,0.384,1,1
+"Pterine Biosynthesis",4,0.593,1,0.477,1,1
+"Malate-Aspartate Shuttle",4,0.593,1,0.477,1,1
+"Catecholamine Biosynthesis",5,0.741,1,0.556,1,1
+"Androgen and Estrogen Metabolism",5,0.741,1,0.556,1,1
+"Selenoamino Acid Metabolism",6,0.889,1,0.624,1,1
+"Beta-Alanine Metabolism",14,2.07,2,0.648,1,1
+"Plasmalogen Synthesis",7,1.04,1,0.682,1,1
+"Mitochondrial Beta-Oxidation of Long Chain Saturated Fatty Acids",7,1.04,1,0.682,1,1
+"Estrone Metabolism",7,1.04,1,0.682,1,1
+"Pantothenate and CoA Biosynthesis",8,1.19,1,0.731,1,1
+"Oxidation of Branched Chain Fatty Acids",8,1.19,1,0.731,1,1
+"Fatty acid Metabolism",8,1.19,1,0.731,1,1
+"Mitochondrial Beta-Oxidation of Medium Chain Saturated Fatty Acids",8,1.19,1,0.731,1,1
+"Mitochondrial Beta-Oxidation of Short Chain Saturated Fatty Acids",9,1.33,1,0.773,1,1
+"Carnitine Synthesis",10,1.48,1,0.809,1,1
+"Bile Acid Biosynthesis",11,1.63,1,0.839,1,1
+"Glutathione Metabolism",12,1.78,1,0.865,1,1
+"Methionine Metabolism",22,3.26,2,0.877,1,1
+"Tyrosine Metabolism",13,1.93,1,0.886,1,1
+"Valine, Leucine and Isoleucine Degradation",13,1.93,1,0.886,1,1
+"Nicotinate and Nicotinamide Metabolism",13,1.93,1,0.886,1,1
+"Ammonia Recycling",14,2.07,1,0.905,1,1
+"Aspartate Metabolism",14,2.07,1,0.905,1,1
+"Arginine and Proline Metabolism",24,3.56,2,0.908,1,1
+"Urea Cycle",15,2.22,1,0.92,1,1
+"Amino Sugar Metabolism",17,2.52,1,0.944,1,1
+"Pyrimidine Metabolism",17,2.52,1,0.944,1,1
+"Tryptophan Metabolism",17,2.52,1,0.944,1,1
+"Histidine Metabolism",19,2.81,1,0.961,1,1
+"Glutamate Metabolism",22,3.26,1,0.978,1,1
