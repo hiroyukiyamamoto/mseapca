@@ -4,7 +4,7 @@
 
 # mseapca
 mseapcaパッケージについてはメンテナンスを停止しています。  
-新たなパッケージに移行予定です。
+今後、新たなパッケージに移行予定です。
 
 R package for statististical analysis in metabolomics
 
