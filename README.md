@@ -1,8 +1,11 @@
 # protocols
-メタボロミクス実践ガイドの補足ファイルはprotocolsフォルダに保管してあります。
+メタボロミクス実践ガイドの補足ファイルはprotocolsフォルダに保管してあります。  
 一部準備が完了していないファイルもありますので、適宜追加予定です(2021.3.30)
 
-# mseapca(大幅改修予定)
+# mseapca
+mseapcaパッケージについてはメンテナンスを停止しています。  
+新たなパッケージに移行予定です。
+
 R package for statististical analysis in metabolomics
 
 論文はこちら<BR>
