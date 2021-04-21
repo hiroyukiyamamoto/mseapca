@@ -1,0 +1,31 @@
+# PID of current job: 3089479
+mSet<-InitDataObjects("conc", "stat", FALSE)
+mSet<-Read.TextData(mSet, "Replacing_with_your_file_path", "colu", "disc");
+mSet<-SanityCheckData(mSet)
+mSet<-ContainMissing(mSet)
+mSet<-SanityCheckData(mSet)
+mSet<-ContainMissing(mSet)
+mSet<-ReplaceMin(mSet);
+mSet<-SanityCheckData(mSet)
+mSet<-ContainMissing(mSet)
+mSet<-FilterVariable(mSet, "none", "F", 25)
+mSet<-PreparePrenormData(mSet)
+mSet<-Normalization(mSet, "NULL", "NULL", "AutoNorm", ratio=FALSE, ratioNum=20)
+mSet<-PlotNormSummary(mSet, "norm_0_", "png", 72, width=NA)
+mSet<-PlotSampleNormSummary(mSet, "snorm_0_", "png", 72, width=NA)
+mSet<-PCA.Anal(mSet)
+mSet<-PlotPCAPairSummary(mSet, "pca_pair_0_", "png", 72, width=NA, 5)
+mSet<-PlotPCAScree(mSet, "pca_scree_0_", "png", 72, width=NA, 5)
+mSet<-PlotPCA2DScore(mSet, "pca_score2d_0_", "png", 72, width=NA, 1,2,0.95,0,0)
+mSet<-PlotPCALoading(mSet, "pca_loading_0_", "png", 72, width=NA, 1,2);
+mSet<-PlotPCABiplot(mSet, "pca_biplot_0_", "png", 72, width=NA, 1,2)
+mSet<-PlotPCA3DLoading(mSet, "pca_loading3d_0_", "json", 1,2,3)
+mSet<-PLSR.Anal(mSet, reg=TRUE)
+mSet<-PlotPLSPairSummary(mSet, "pls_pair_0_", "png", 72, width=NA, 5)
+mSet<-PlotPLS2DScore(mSet, "pls_score2d_0_", "png", 72, width=NA, 1,2,0.95,0,0)
+mSet<-PlotPLS3DScoreImg(mSet, "pls_score3d_0_", "png", 72, width=NA, 1,2,3, 40)
+mSet<-PlotPLSLoading(mSet, "pls_loading_0_", "png", 72, width=NA, 1, 2);
+mSet<-PlotPLS3DLoading(mSet, "pls_loading3d_0_", "json", 1,2,3)
+mSet<-PLSDA.CV(mSet, "L",5, "Q2")
+mSet<-PlotPLS.Classification(mSet, "pls_cv_0_", "png", 72, width=NA)
+mSet<-PlotPLS.Imp(mSet, "pls_imp_0_", "png", 72, width=NA, "vip", "Comp. 1", 15,FALSE)
