@@ -12,5 +12,5 @@ mseapca: Metabolite set enrichment analysis for factor loading in principal comp
 
 メタボロミクス実践ガイド
 ================
-[メタボロミクス実践ガイド](https://www.yodosha.co.jp/yodobook/book/9784758122511/)の補足ファイルは、doc/protocolsフォルダに保管してあります。  
+[メタボロミクス実践ガイド](https://www.yodosha.co.jp/yodobook/book/9784758122511/)の補足ファイルは、[doc/protocolsフォルダ](https://github.com/hiroyukiyamamoto/doc/tree/main/protocols)に保管してあります。  
 一部準備が完了していないファイルもありますので、適宜追加予定です(2021.3.30)
