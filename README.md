@@ -1,16 +1,31 @@
-mseapca: Metabolite set enrichment analysis for factor loading in principal component analysis 
-================
+# mseapca
+Metabolite set enrichment analysis for loadings
 
-### Paper
+**mseapca**  provides functions for metabolite set enrichment analysis with loading in principal component anaysis and partial least squares and partial least squares, and single sample enrichment analysis.
 
->   - Hiroyuki Yamamoto et al, "Statistical hypothesis testing of factor loading in principal component analysis and its application to metabolite set enrichment analysis" BMC Bioinformatics, (2014) 15(1):51.
+- Metabolite set enrichment analysis [1] can be performed using the "msea_ora" or "msea_sub" functions.
 
-### Information
+- Our mseapca package utilizes the loadings package ( https://cran.r-project.org/web/packages/loadings ) to conduct multivariate analyses like PCA and PLS, along with their respective loadings.
 
->   - This repository has been integrated into the "loadings" (https://github.com/hiroyukiyamamoto/loadings).
+- The "ssea_ora" function can be used to compute single sample enrichment analysis based on over-representation analysis [2].
 
+- Our mseapca package can incorporate a metabolite set list from the PathBank database by referencing the AHPathbankDbs Bioconductor package or through user-generated lists.
 
-A Practical Guide to Metabolomics
-================
-[メタボロミクス実践ガイド](https://www.yodosha.co.jp/yodobook/book/9784758122511/)の補足ファイルは、[doc/protocolsフォルダ](https://github.com/hiroyukiyamamoto/doc/tree/main/protocols)に保管してあります。  
-一部準備が完了していないファイルもありますので、適宜追加予定です(2021.3.30)
+**References**  
+[1] Yamamoto H. et al., BMC Bioinformatics, (2014) 15(1):51. doi: https://doi.org/10.1186/1471-2105-15-51  
+[2] Yamamoto H. , Jxiv, (2023). doi: https://doi.org/10.51094/jxiv.484  
+
+## Installation (in preparation)
+
+The latest stable version can be installed from CRAN:
+
+``` r
+install.packages("mseapca")
+```
+
+The latest development version can be installed from GitHub:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("hiroyukiyamamoto/mseapca")
+```
