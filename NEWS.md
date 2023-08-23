@@ -1,17 +1,10 @@
 ## version 2.0.1
 
-### Licensing
-
+- Released in August 26th, 2023.
 - License changed from BSD to LGPL-3.
-
-### Changes
-
 - Minor modifications to the `list2xml` function.
 - Removed the `pathway_class` and `pca_scaled` functions. For computing principal component loading, please use the `loadings` package  [https://cran.r-project.org/web/packages/loadings].
 - New functions `pathbank2list` and `ssea_ora` were added.
-
-### Data
-
 - Added pathway data for demonstration purposes.
 
 ## version 1.0
