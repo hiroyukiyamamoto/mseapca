@@ -10,8 +10,11 @@ ssea_ora(detected, M)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{detected}{
+  \item{det_list}{
   metabolite names of detected metabolites
+  }
+  \item{det_all}{
+  metabolite names of all metabolites
   }
   \item{M}{
   list of metabolite set and metabolite names
@@ -33,12 +36,12 @@ Yamamoto H., Single sample enrichment analysisfor mass spectrometry-based omics 
 data(fasting)
 data(pathway)
 
-X <- fasting$X
-detected <- colnames(X)
+det_list <- pathway$data$fasting
+M <- pathway$fasting
+det_all <- unique(c(colnames(fasting$X), as.character(unlist(M)))) 
 
 # SSEA
-M <- pathway$fasting
-Z <- ssea_ora(detected, M)
+Z <- ssea_ora(det_list, det_all, M)
 
 ## PCA for SSEA score
 pca <- prcomp(Z, scale=TRUE)
