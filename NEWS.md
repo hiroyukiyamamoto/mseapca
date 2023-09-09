@@ -1,3 +1,6 @@
+## version 2.0.2
+- `ssea_ora` was modified.
+
 ## version 2.0.1
 
 - Released in August 26th, 2023.
