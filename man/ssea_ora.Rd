@@ -6,7 +6,7 @@
 This function performs single sample enrichment analysis (SSEA) by over representation analysis (ORA). SSEA performs MSEA by ORA between detected and not detected metabolites in each sample."
 }
 \usage{
-ssea_ora(detected, M)
+ssea_ora(det_list, det_all, M)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
