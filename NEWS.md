@@ -1,7 +1,8 @@
 ## version 2.0.2
 
-- Released in September 9th, 2023.
+- Released in November 5th, 2023.
 - `ssea_ora` was modified.
+- All R files are now ensured to be UTF-8 encoded.
 
 ## version 2.0.1
 

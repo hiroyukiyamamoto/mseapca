@@ -1,8 +1,8 @@
 Package: mseapca
 Type: Package
 Title: Metabolite Set Enrichment Analysis for Loadings
-Version: 2.0.1
-Date: 2023-08-20
+Version: 2.0.2
+Date: 2023-11-5
 Author: Hiroyuki Yamamoto
 Maintainer: Hiroyuki Yamamoto <h.yama2396@gmail.com>
 Description: Computing metabolite set enrichment analysis (MSEA) (Yamamoto, H. et al. (2014) <doi:10.1186/1471-2105-15-51>) and single sample enrichment analysis (SSEA) (Yamamoto, H. (2023) <doi:10.51094/jxiv.262>).
