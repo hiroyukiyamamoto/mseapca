@@ -4,8 +4,8 @@
 \title{Generate binary label matrix of metabolite set}
 \description{
 This function generates binary label matrix of metabolite names and metabolite sets.
-This is mainly used to be called by other functions, and used 
-to count the number of metabolites in a specific metabolite set. 
+This is mainly used to be called by other functions, and used
+to count the number of metabolites in a specific metabolite set.
 }
 \usage{
 setlabel(M_ID, M)
@@ -39,4 +39,4 @@ L <- setlabel(M_ID,M)	# binary label matrix
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ list }
+\keyword{ manip }

@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read metabolite set file (*.xml)}
 \description{
-This function generates metabolite set list from metabolite set file (XML). 
+This function generates metabolite set list from metabolite set file (XML).
 This is mainly used to be called by other functions.
 }
 \usage{
@@ -22,9 +22,11 @@ read_pathway(fullpath)
 Hiroyuki Yamamoto
 }
 \examples{
-	# filename <- "C:/R/pathway.xml"	# load metabolite set file
-	# M <- read_pathway(filename)		# Convert XML to metabolite set (list)
+\dontrun{
+	filename <- "C:/R/pathway.xml"	# load metabolite set file
+	M <- read_pathway(filename)		# Convert XML to metabolite set (list)
+  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ list }
+\keyword{ manip }

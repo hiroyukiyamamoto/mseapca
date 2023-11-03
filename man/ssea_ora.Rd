@@ -33,6 +33,7 @@ Hiroyuki Yamamoto
 Yamamoto H., Single sample enrichment analysisfor mass spectrometry-based omics data, Jxiv.(2023)
 }
 \examples{
+\dontrun{
 data(fasting)
 data(pathway)
 
@@ -46,6 +47,7 @@ Z <- ssea_ora(det_list, det_all, M)
 ## PCA for SSEA score
 pca <- prcomp(Z, scale=TRUE)
 pca <- pca_loading(pca)
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -27,9 +27,14 @@ filepath of saved XML file
 Hiroyuki Yamamoto
 }
 \examples{
-xml_file <- "pathway_fasting.xml"
-list2xml(xml_file, M)
+\dontrun{
+	data(pathway)
+	M <- pathway$fasting
+	xml_file <- "pathway_fasting.xml"
+	N <- list2xml(xml_file, M)
+	# XML::saveXML(N,filepath)
+	}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ list }
+\keyword{ manip }
