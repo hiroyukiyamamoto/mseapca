@@ -1,4 +1,4 @@
-pathbank2list <- function(tbl_pathbank, subject, id){
+﻿pathbank2list <- function(tbl_pathbank, subject, id){
 
   index0 <- which(tbl_pathbank$`Pathway Subject`==subject)
   u_pathway <- unique(tbl_pathbank$`Pathway Name`[index0])

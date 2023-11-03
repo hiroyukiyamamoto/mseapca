@@ -1,4 +1,4 @@
-msea_ora <-
+﻿msea_ora <-
 function (SIG, ALL, M){
 
 ALL <- as.character(as.matrix(ALL))
@@ -40,7 +40,7 @@ P<-NaN;
 for (i in 1:sum(l)){
 
 # ------------------------------------
-#Generating 2�~2 table
+#Generating 2×2 table
 # -------------------------------------
 a1 <- sum(Lsig[,i])# significant and including pathway
 a2 <- sum(Lall[,i])-sum(Lsig[,i])# not significant and including pathway

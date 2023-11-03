@@ -1,4 +1,4 @@
-csv2list <-
+﻿csv2list <-
 function (filepath) {
 
 # read csv file

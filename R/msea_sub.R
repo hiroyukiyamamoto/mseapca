@@ -1,4 +1,4 @@
-msea_sub <-
+﻿msea_sub <-
 function (M, D, y, maxiter=1000){
 
 # ---------------------
@@ -19,7 +19,7 @@ M_ID <- M_ID[index]
 S_name <- names(M) # metabolite set name
 
 # -----------------------------------------------------
-#Generating [set�~metabolite ID] matrix L
+#Generating [set×metabolite ID] matrix L
 # -----------------------------------------------------
 L <- setlabel(M_ID,M)
 

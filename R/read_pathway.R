@@ -1,12 +1,9 @@
-read_pathway <-
+﻿read_pathway <-
 function (fullpath) {
 
-# load XML library
-library(XML)
-
 # read XML file
-a <- xmlTreeParse(fullpath)
-b <- xmlRoot(a)
+a <- XML::xmlTreeParse(fullpath)
+b <- XML::xmlRoot(a)
 
 # metabolite set list
 ID <- NaN
@@ -15,12 +12,12 @@ for (i in 1:length(b)){
 
 # // ID
 s <- b[[i]]
-u <- xmlToList(s)
+u <- XML::xmlToList(s)
 v <- u[names(u)=="compound"]
 id <- as.character(unlist(v))
 
 ID[i] <- list(id)
-metabolite_set[i] <- as.character(xmlAttrs(b[[i]]))
+metabolite_set[i] <- as.character(XML::xmlAttrs(b[[i]]))
 }
 
 names(ID) <- metabolite_set
