@@ -2,66 +2,102 @@
 # This function performs an adjusted ORA that accounts for undetected metabolites in each pathway.
 # It builds upon the base ORA function and applies a correction based on estimated significance of undetected metabolites.
 
-msea_ora2 <- function (SIG, DET, ALL, M) {
+msea_ora2 <- function(SIG, DET, ALL, M, option = "default") {
   
   # Step 1: Label assignment for each metabolite group
-  # L1: All metabolites (in ALL)
-  # L2: Detected metabolites (in DET)
-  # L3: Significant metabolites (in SIG)
-  L1 <- setlabel(ALL, M)
-  L2 <- setlabel(DET, M)
-  L3 <- setlabel(SIG, M)
+  L1 <- setlabel(ALL, M) # All metabolites
+  L2 <- setlabel(DET, M) # Detected metabolites
+  L3 <- setlabel(SIG, M) # Significant metabolites
   
   # Step 2: Perform base ORA on detected metabolites
-  # B includes basic ORA results used for adjustment
   B <- msea_ora(SIG, DET, M)
   
-  # Initialize vector to store p-values for each pathway
+  # Initialize vectors to store results
   P <- NULL
+  P_range <- NULL
   
-  # Step 3: Loop through each pathway and calculate adjusted counts
+  # Step 3: Loop through each pathway
   for (i in 1:length(M)) {
-    
-    # Total, detected, and significant counts for each pathway
+    # Counts for each pathway
     l1 <- colSums(L1)[i]  # Total metabolites
     l2 <- colSums(L2)[i]  # Detected metabolites
     l3 <- colSums(L3)[i]  # Significant metabolites
     
-    # Proportion of significant among detected and estimate for undetected
+    # Proportion of significant among detected, and estimate for undetected
     r <- l3 / l2
-    n <- l1 - l2  # Undetected metabolites count
+    n <- l1 - l2  # Count of undetected metabolites
     
-    # Adjusted contingency table counts
-    a <- round(B$TAB[[i]][1,1] + n * r)     # Adjusted significant count
-    b <- round(B$TAB[[i]][1,2] + n * (1 - r))  # Adjusted non-significant count
+    # Construct adjusted 2x2 table
+    a <- round(B$TAB[[i]][1,1] + n * r)
+    b <- round(B$TAB[[i]][1,2] + n * (1 - r))
     
-    # Calculate baseline significance proportion from detected metabolites
+    # Baseline significance proportion from detected metabolites
     p <- length(SIG) / length(DET)
     
-    # Counts for non-significant detected and total substances
+    # Count of non-significant detected and total substances
     c <- round(length(ALL) * p - a)
     d <- round(length(ALL) * (1 - p) - b)
     
-    # Fisher's exact test for the adjusted contingency table
-    tab <- t(matrix(c(a, b, c, d), 2))
-    resfish <- fisher.test(tab, alternative = "greater")
-    print(resfish)  # Display test results for each pathway
-    
-    # Store p-value
-    P[i] <- resfish$p.value
+    # Conditional branching based on option
+    if (option == "range") {
+      # Calculate p-value range
+      possible_values <- 0:min(n, l1)  # Full range of undetected metabolites
+      p_values <- sapply(possible_values, function(x) {
+        # Construct 2x2 table for all patterns
+        a_var <- round(B$TAB[[i]][1,1] + x * r)
+        b_var <- round(B$TAB[[i]][1,2] + x * (1 - r))
+        c_var <- round(length(ALL) * p - a_var)
+        d_var <- round(length(ALL) * (1 - p) - b_var)
+        
+        tab_var <- matrix(c(a_var, b_var, c_var, d_var), nrow = 2)
+        
+        # Fisher's exact test for each pattern
+        fisher.test(tab_var, alternative = "greater")$p.value
+      })
+      
+      # Obtain the range of p-values (minimum and maximum)
+      p_min <- min(p_values)
+      p_max <- max(p_values)
+
+      # Perform Fisher's test in the default case
+      tab <- matrix(c(a, b, c, d), nrow = 2)
+      resfish <- fisher.test(tab, alternative = "greater")
+      P[i] <- resfish$p.value
+      
+      # Store the range result
+      P_range <- rbind(P_range, c(p_min, p_max))
+      
+    } else {
+      # Perform Fisher's test in the default case
+      tab <- matrix(c(a, b, c, d), nrow = 2)
+      resfish <- fisher.test(tab, alternative = "greater")
+      P[i] <- resfish$p.value
+    }
   }
   
-  # Step 4: Adjust p-values for multiple testing using Benjamini-Hochberg correction
-  Q <- p.adjust(P, method = "BH")
-  PQ <- cbind(P, Q)
+  # Compile results
+  if (option == "range") {
+    Q <- p.adjust(P, method = "BH")
+    PQ <- cbind(P, Q)
+    rownames(PQ) <- names(M)
+    colnames(PQ) <- c("p.value", "q.value")
+    
+    # Output the range of lower and upper p-values
+    rownames(P_range) <- names(M)
+    colnames(P_range) <- c("lower p-value", "upper p-value")
+    
+    result <- list(PQ, P_range)
+    names(result) <- c("Result of MSEA (ORA with adjustment)", "Range of p-values")
+
+  } else {
+    # Adjust p-values for multiple testing (default)
+    Q <- p.adjust(P, method = "BH")
+    PQ <- cbind(P, Q)
+    rownames(PQ) <- names(M)
+    colnames(PQ) <- c("p.value", "q.value")
+    result <- list(PQ)
+    names(result) <- c("Result of MSEA (ORA with adjustment)")
+  }
   
-  # Set column and row names for clarity
-  colnames(PQ) <- c("p.value", "q.value")
-  rownames(PQ) <- names(M)
-  
-  # Final results as a named list
-  RES <- list(PQ)
-  names(RES) <- c("Result of MSEA (ORA with adjustment)")
-  
-  return(RES)
+  return(result)
 }
