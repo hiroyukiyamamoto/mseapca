@@ -1,7 +1,7 @@
 library(mseapca)
 
 ### Subramanian QEA
-msea_sub2 <- function (R, M, maxiter = 100) 
+msea_sub_core <- function (R, M, maxiter = 100) 
 {
 
   S_name <- names(M)
