@@ -35,30 +35,35 @@ msea_ora2 <- function(SIG, DET, ALL, M, option = "default") {
     p <- length(SIG) / length(DET)
     
     # Count of non-significant detected and total substances
-    c <- round(length(ALL) * p - a)
-    d <- round(length(ALL) * (1 - p) - b)
+    c <- max(0, round(length(ALL) * p - a))
+    d <- max(0, round(length(ALL) * (1 - p) - b))
     
     # Conditional branching based on option
     if (option == "range") {
       # Calculate p-value range
-      possible_values <- 0:min(n, l1)  # Full range of undetected metabolites
+      possible_values <- 0:n  # Full range of undetected metabolites
       p_values <- sapply(possible_values, function(x) {
         # Construct 2x2 table for all patterns
-        a_var <- round(B$TAB[[i]][1,1] + x * r)
-        b_var <- round(B$TAB[[i]][1,2] + x * (1 - r))
-        c_var <- round(length(ALL) * p - a_var)
-        d_var <- round(length(ALL) * (1 - p) - b_var)
+        a_var <- l3 + x
+        b_var <- l2 - l3 + (n - x)
+        c_var <- max(0, round(length(ALL) * p - a_var))
+        d_var <- max(0, round(length(ALL) * (1 - p) - b_var))
         
         tab_var <- matrix(c(a_var, b_var, c_var, d_var), nrow = 2)
         
-        # Fisher's exact test for each pattern
-        fisher.test(tab_var, alternative = "greater")$p.value
+        # Fisher's exact test for each pattern if valid table
+        if (all(tab_var >= 0) && all(is.finite(tab_var))) {
+          fisher.test(tab_var, alternative = "greater")$p.value
+        } else {
+          NA  # Invalid table entries
+        }
       })
       
       # Obtain the range of p-values (minimum and maximum)
+      p_values <- na.omit(p_values)  # Remove NAs from invalid tables
       p_min <- min(p_values)
       p_max <- max(p_values)
-
+      
       # Perform Fisher's test in the default case
       tab <- matrix(c(a, b, c, d), nrow = 2)
       resfish <- fisher.test(tab, alternative = "greater")
@@ -88,7 +93,7 @@ msea_ora2 <- function(SIG, DET, ALL, M, option = "default") {
     
     result <- list(PQ, P_range)
     names(result) <- c("Result of MSEA (ORA with adjustment)", "Range of p-values")
-
+    
   } else {
     # Adjust p-values for multiple testing (default)
     Q <- p.adjust(P, method = "BH")
