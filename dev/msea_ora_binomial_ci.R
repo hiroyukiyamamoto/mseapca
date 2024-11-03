@@ -24,8 +24,8 @@ msea_ora_binomial_ci <- function(SIG, DET, ALL, M, num_simulations = 1000) {
     l2 <- sum(DET %in% M[[i]])   # Detected metabolites in the pathway
     l3 <- sum(SIG %in% M[[i]])   # Significant metabolites in the pathway
     
-    # Use a slightly reduced significance proportion for detected metabolites
-    r <- ifelse(l2 > 0, min(l3 / l2, 0.99), 0)  # Set to 99% if proportion is 100%
+    # Directly use the proportion of significant metabolites among detected metabolites
+    r <- ifelse(l2 > 0, l3 / l2, 0)  # Proportion of significant metabolites
     n <- l1 - l2  # Number of undetected metabolites in the pathway
     
     # Initial 2x2 table based on undetected metabolites
@@ -59,8 +59,8 @@ msea_ora_binomial_ci <- function(SIG, DET, ALL, M, num_simulations = 1000) {
     }
     
     # Obtain the range of p-values from simulations
-    p_min <- min(simulated_p_values)
-    p_max <- max(simulated_p_values)
+    p_min <- quantile(simulated_p_values, probs = 0.025)
+    p_max <- quantile(simulated_p_values, probs = 0.975)
     
     # Calculate the default p-value using Fisher's exact test
     tab <- matrix(c(a, b, c, d), nrow = 2)
