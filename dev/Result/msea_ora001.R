@@ -30,8 +30,10 @@ source("C:/Users/hyama/Documents/R/msea/msea_ora_all_combination.R")
 B2 <- msea_ora_all_combination(SIG, DET, ALL, M)
 B3 <- msea_ora_all_combination(SIG, DET, ALL, M, "range")
 
-source("C:/Users/hyama/Documents/R/msea/msea_ora_beta_ci.R")
-B4 <- msea_ora_beta_ci(SIG, DET, ALL, M)
-
 source("C:/Users/hyama/Documents/R/msea/msea_ora_binomial_ci.R")
-B5 <- msea_ora_binomial_ci(SIG, DET, ALL, M)
+B4 <- msea_ora_binomial_ci(SIG, DET, ALL, M)
+
+source("C:/Users/hyama/Documents/R/msea/msea_ora_beta_ci.R")
+B5 <- msea_ora_beta_ci(SIG, DET, ALL, M)
+
+

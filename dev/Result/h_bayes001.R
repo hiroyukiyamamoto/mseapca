@@ -77,6 +77,7 @@ p_value_ci_matrix <- matrix(NA, nrow = length(M), ncol = 2)
 rownames(p_value_ci_matrix) <- names(M)
 colnames(p_value_ci_matrix) <- c("Lower p-value CI", "Upper p-value CI")
 
+P <- NULL
 for (i in 1:length(M)) {
   # 各パスウェイの検出されていない物質数
   N_detected <- sum(DET %in% M[[i]])           # パスウェイ内の検出された物質数
@@ -101,6 +102,9 @@ for (i in 1:length(M)) {
   
   # 各パスウェイのp値の95%信頼区間を取得
   p_value_ci_matrix[i, ] <- quantile(p_values, probs = c(0.025, 0.975), na.rm = TRUE)
+  #mean(p_values)
+  
+  P <- rbind(P,c(p_value_ci_matrix[i, 1],mean(p_values),p_value_ci_matrix[i, 2]))
 }
 
 # 結果の表示
@@ -108,4 +112,4 @@ print("Result of ORA (baseline p-values)")
 print(ora_p_values)
 
 print("95% CI for ORA p-values based on Bayesian hierarchical model")
-print(p_value_ci_matrix)
+print(P)
