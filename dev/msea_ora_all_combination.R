@@ -70,7 +70,7 @@ msea_ora_all_combination <- function(SIG, DET, ALL, M, option = "default") {
       P[i] <- resfish$p.value
       
       # Store the range result
-      P_range <- rbind(P_range, c(p_min, p_max))
+      P_range <- rbind(P_range, c(p_min, mean(p_values), p_max))
       
     } else {
       # Perform Fisher's test in the default case
@@ -89,7 +89,7 @@ msea_ora_all_combination <- function(SIG, DET, ALL, M, option = "default") {
     
     # Output the range of lower and upper p-values
     rownames(P_range) <- names(M)
-    colnames(P_range) <- c("lower p-value", "upper p-value")
+    colnames(P_range) <- c("lower p-value", "p-value(mean)", "upper p-value")
     
     result <- list(PQ, P_range)
     names(result) <- c("Result of MSEA (ORA with adjustment)", "Range of p-values")

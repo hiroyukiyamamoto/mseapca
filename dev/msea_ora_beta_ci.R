@@ -60,10 +60,10 @@ msea_ora_beta_ci <- function(SIG, DET, ALL, M, alpha_prior = 1, beta_prior = 1, 
     # Calculate the default p-value using Fisher's exact test
     tab <- matrix(c(B$TAB[[i]][1, 1], B$TAB[[i]][1, 2], round(length(ALL) * p - B$TAB[[i]][1, 1]), round(length(ALL) * (1 - p) - B$TAB[[i]][1, 2])), nrow = 2)
     resfish <- fisher.test(tab, alternative = "greater")
-    P[i] <- resfish$p.value
-    
+    P[i] <- mean(simulated_p_values)
+
     # Store the range of p-values
-    P_range <- rbind(P_range, c(p_min, p_max))
+    P_range <- rbind(P_range, c(p_min, P[i], p_max))
   }
   
   # Adjust p-values for multiple testing
@@ -74,7 +74,7 @@ msea_ora_beta_ci <- function(SIG, DET, ALL, M, alpha_prior = 1, beta_prior = 1, 
   
   # Set row and column names for p-value range output
   rownames(P_range) <- names(M)
-  colnames(P_range) <- c("lower p-value", "upper p-value")
+  colnames(P_range) <- c("lower p-value", "p-value(mean)","upper p-value")
   
   # Display results
   list("Result of MSEA (ORA with adjustment)" = PQ, 
