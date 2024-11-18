@@ -77,6 +77,8 @@ calculate_global_Z <- function(X, Y) {
 X <- fasting$X
 Y <- fasting$Y[, 1] # バイナリ表現型の1列目を使用
 
+X <- scale(X)
+
 # 全物質を使った Z の計算
 Z_all <- calculate_global_Z(X, Y)
 
