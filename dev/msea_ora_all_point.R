@@ -2,7 +2,7 @@
 # This function performs an adjusted ORA that accounts for undetected metabolites in each pathway.
 # It builds upon the base ORA function and applies a correction based on estimated significance of undetected metabolites.
 
-msea_ora_all_combination <- function(SIG, DET, ALL, M) {
+msea_ora_all_point <- function(SIG, DET, ALL, M) {
   
   # Step 1: Label assignment for each metabolite group
   L1 <- setlabel(ALL, M) # All metabolites
@@ -38,41 +38,20 @@ msea_ora_all_combination <- function(SIG, DET, ALL, M) {
     c <- max(0, round(length(ALL) * p - a))
     d <- max(0, round(length(ALL) * (1 - p) - b))
     
-    # Conditional branching based on option
-    # Calculate p-value range
-    possible_values <- 0:n  # Full range of undetected metabolites
-    p_values <- sapply(possible_values, function(x) {
-      # Construct 2x2 table for all patterns
-      a_var <- l3 + x
-      b_var <- l2 - l3 + (n - x)
-      c_var <- max(0, round(length(ALL) * p - a_var))
-      d_var <- max(0, round(length(ALL) * (1 - p) - b_var))
-        
-      tab_var <- matrix(c(a_var, b_var, c_var, d_var), nrow = 2)
-        
-    # Fisher's exact test for each pattern if valid table
-      if (all(tab_var >= 0) && all(is.finite(tab_var))) {
-        fisher.test(tab_var, alternative = "greater")$p.value
-      } else {
-        NA  # Invalid table entries
-      }
-    })
-      
-    # Obtain the range of p-values (minimum and maximum)
-    p_values <- na.omit(p_values)  # Remove NAs from invalid tables
-    p_min <- min(p_values)
-    p_max <- max(p_values)
+    # Perform Fisher's test in the default case
+    tab <- matrix(c(a, b, c, d), nrow = 2)
+    resfish <- fisher.test(tab, alternative = "greater")
+    P[i] <- resfish$p.value
 
-    # Store the range result
-    P_range <- rbind(P_range, c(p_min, median(p_values), p_max))      
   }
   
-  # Output the range of lower and upper p-values
-  rownames(P_range) <- names(M)
-  colnames(P_range) <- c("lower p-value", "p-value(median)", "upper p-value")
-    
-  result <- list(P_range)
-  names(result) <- c("Range of p-values")
-    
+  # Adjust p-values for multiple testing (default)
+  Q <- p.adjust(P, method = "BH")
+  PQ <- cbind(P, Q)
+  rownames(PQ) <- names(M)
+  colnames(PQ) <- c("p.value", "q.value")
+  result <- list(PQ)
+  names(result) <- c("Result of MSEA (ORA with adjustment)")
+
   return(result)
 }

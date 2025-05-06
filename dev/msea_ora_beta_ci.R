@@ -37,7 +37,7 @@ msea_ora_beta_ci <- function(SIG, DET, ALL, M, alpha_prior = 1, beta_prior = 1, 
     simulated_p_values <- numeric(num_simulations)
     for (j in 1:num_simulations) {
       sampled_significant <- round(n * simulated_proportions[j])
-      
+
       # Reconstruct 2x2 table based on resampling
       a_var <- B$TAB[[i]][1, 1] + sampled_significant
       b_var <- B$TAB[[i]][1, 2] + (n - sampled_significant)
@@ -55,28 +55,23 @@ msea_ora_beta_ci <- function(SIG, DET, ALL, M, alpha_prior = 1, beta_prior = 1, 
     
     # Obtain the 95% confidence interval for the p-values
     p_min <- quantile(simulated_p_values, probs = 0.025)
+    p_median <- median(simulated_p_values)
     p_max <- quantile(simulated_p_values, probs = 0.975)
     
     # Calculate the default p-value using Fisher's exact test
     tab <- matrix(c(B$TAB[[i]][1, 1], B$TAB[[i]][1, 2], round(length(ALL) * p - B$TAB[[i]][1, 1]), round(length(ALL) * (1 - p) - B$TAB[[i]][1, 2])), nrow = 2)
     resfish <- fisher.test(tab, alternative = "greater")
-    P[i] <- mean(simulated_p_values)
+    #P[i] <- mean(simulated_p_values)
 
     # Store the range of p-values
-    P_range <- rbind(P_range, c(p_min, P[i], p_max))
+    P_range <- rbind(P_range, c(p_min, p_median, p_max))
   }
-  
-  # Adjust p-values for multiple testing
-  Q <- p.adjust(P, method = "BH")
-  PQ <- cbind(P, Q)
-  rownames(PQ) <- names(M)
-  colnames(PQ) <- c("p.value", "q.value")
   
   # Set row and column names for p-value range output
   rownames(P_range) <- names(M)
-  colnames(P_range) <- c("lower p-value", "p-value(mean)","upper p-value")
+  colnames(P_range) <- c("lower p-value", "p-value(median)","upper p-value")
   
   # Display results
-  list("Result of MSEA (ORA with adjustment)" = PQ, 
-       "Range of p-values for each pathway (95% CI using Beta distribution)" = P_range)
+  list("Range of p-values for each pathway (95% CI using Beta distribution)" = P_range)
+  
 }

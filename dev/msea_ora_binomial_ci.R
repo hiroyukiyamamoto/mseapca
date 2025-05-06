@@ -4,6 +4,8 @@
 # the range of p-values based on a 95% confidence interval. The results provide both the baseline p-value
 # and the range of possible p-values based on the binomial resampling approach.
 
+source("C:/Users/hyama/Documents/R/msea/msea_ora.R")
+
 msea_ora_binomial_ci <- function(SIG, DET, ALL, M, num_simulations = 1000) {
   
   # Set a random seed for reproducibility
@@ -45,43 +47,33 @@ msea_ora_binomial_ci <- function(SIG, DET, ALL, M, num_simulations = 1000) {
     for (j in 1:num_simulations) {
       # Resample significant metabolites among undetected ones using a binomial distribution
       sampled_significant <- rbinom(1, size = n, prob = r)
-      
+
       # Reconstruct the 2x2 table based on resampling
       a_var <- a + sampled_significant
       b_var <- b + (n - sampled_significant)
       c_var <- round(length(ALL) * p - a_var)
       d_var <- round(length(ALL) * (1 - p) - b_var)
       
-      tab_var <- matrix(c(a_var, b_var, c_var, d_var), nrow = 2)
-      
+      tab_var <- t(matrix(c(a_var, b_var, c_var, d_var), nrow = 2))
+
       # Calculate p-value using Fisher's exact test
       simulated_p_values[j] <- fisher.test(tab_var, alternative = "greater")$p.value
     }
     
     # Obtain the range of p-values from simulations
     p_min <- quantile(simulated_p_values, probs = 0.025)
+    p_median <- median(simulated_p_values)
     p_max <- quantile(simulated_p_values, probs = 0.975)
     
-    # Calculate the default p-value using Fisher's exact test
-    tab <- matrix(c(a, b, c, d), nrow = 2)
-    resfish <- fisher.test(tab, alternative = "greater")
-    P[i] <- mean(simulated_p_values)
-    
     # Store the range of p-values
-    P_range <- rbind(P_range, c(p_min, P[i], p_max))
+    P_range <- rbind(P_range, c(p_min, p_median, p_max))
   }
-  
-  # Adjust p-values for multiple testing
-  Q <- p.adjust(P, method = "BH")
-  PQ <- cbind(P, Q)
-  rownames(PQ) <- names(M)
-  colnames(PQ) <- c("p.value", "q.value")
   
   # Set row and column names for p-value range output
   rownames(P_range) <- names(M)
-  colnames(P_range) <- c("lower p-value", "p-value(mean)","upper p-value")
+  colnames(P_range) <- c("lower p-value", "p-value(median)","upper p-value")
   
   # Display results
-  list("Result of MSEA (ORA with adjustment)" = PQ, 
-       "Range of p-values for each pathway (95% confidence interval)" = P_range)
+  list("Range of p-values for each pathway (95% confidence interval)" = P_range)
+  
 }
