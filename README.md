@@ -1,6 +1,8 @@
 # mseapca
 Metabolite set enrichment analysis for loadings
 
+<img src="sticker.png" alt="loadings sticker" width="250"/>
+
 **mseapca**  provides functions for metabolite set enrichment analysis with loading in principal component anaysis and partial least squares, and single sample enrichment analysis.
 
 - Metabolite set enrichment analysis [1] can be performed using the "msea_ora" or "msea_sub" functions.
