@@ -6,7 +6,7 @@
 
 source("C:/Users/hyama/Documents/R/msea/msea_ora.R")
 
-msea_ora_binomial_ci <- function(SIG, DET, ALL, M, num_simulations = 1000) {
+msea_ora_binomial_ci <- function(SIG, DET, ALL, M, probs = c(0.025, 0.975), num_simulations = 1000) {
   
   # Set a random seed for reproducibility
   set.seed(1)
@@ -29,7 +29,7 @@ msea_ora_binomial_ci <- function(SIG, DET, ALL, M, num_simulations = 1000) {
     # Directly use the proportion of significant metabolites among detected metabolites
     r <- ifelse(l2 > 0, l3 / l2, 0)  # Proportion of significant metabolites
     n <- l1 - l2  # Number of undetected metabolites in the pathway
-    
+
     # Initial 2x2 table based on undetected metabolites
     a <- B$TAB[[i]][1,1]
     b <- B$TAB[[i]][1,2]
@@ -61,9 +61,9 @@ msea_ora_binomial_ci <- function(SIG, DET, ALL, M, num_simulations = 1000) {
     }
     
     # Obtain the range of p-values from simulations
-    p_min <- quantile(simulated_p_values, probs = 0.025)
+    p_min <- quantile(simulated_p_values, probs = probs[1])
     p_median <- median(simulated_p_values)
-    p_max <- quantile(simulated_p_values, probs = 0.975)
+    p_max <- quantile(simulated_p_values, probs = probs[2])
     
     # Store the range of p-values
     P_range <- rbind(P_range, c(p_min, p_median, p_max))
