@@ -96,6 +96,8 @@ save(SIG, DET, ALL, M, file="C:/R/ora_fasting.RData")
 ### ORA
 source("C:/Users/hyama/Documents/R/msea/msea_ora_point.R")
 B1 <- msea_ora_point(SIG, DET, ALL, M)
+B12 <- msea_ora_point(SIG, DET, ALL, M, method="weighted")
+B13 <- msea_ora_point(SIG, DET, ALL, M, method="shrink")
 
 source("C:/Users/hyama/Documents/R/msea/msea_ora_all_combination.R")
 B2 <- msea_ora_all_combination(SIG, DET, ALL, M)
@@ -103,9 +105,12 @@ B2 <- msea_ora_all_combination(SIG, DET, ALL, M)
 
 source("C:/Users/hyama/Documents/R/msea/msea_ora_binomial_ci.R")
 B4 <- msea_ora_binomial_ci(SIG, DET, ALL, M)
+B42 <- msea_ora_binomial_ci(SIG, DET, ALL, M, method="weighted")
+B43 <- msea_ora_binomial_ci(SIG, DET, ALL, M, method="shrink")
 
 source("C:/Users/hyama/Documents/R/msea/msea_ora_binomial_ci.R")
-B5 <- msea_ora_binomial_ci(SIG, DET, ALL, M, c(0.2,0.8))
+B5 <- msea_ora_binomial_ci(SIG, DET, ALL, M, method="naive", c(0.1,0.9))
+B52 <- msea_ora_binomial_ci(SIG, DET, ALL, M, method="weighted", c(0.1,0.9))
 
 #source("C:/Users/hyama/Documents/R/msea/msea_ora_binomial_ci2.R")
 #B5 <- msea_ora_binomial_ci2(SIG, DET, ALL, M)

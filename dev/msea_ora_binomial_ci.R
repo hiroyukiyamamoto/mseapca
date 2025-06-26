@@ -6,7 +6,7 @@
 
 source("C:/Users/hyama/Documents/R/msea/msea_ora.R")
 
-msea_ora_binomial_ci <- function(SIG, DET, ALL, M, probs = c(0.025, 0.975), num_simulations = 1000) {
+msea_ora_binomial_ci <- function(SIG, DET, ALL, M, method="naive", probs = c(0.025, 0.975), num_simulations = 1000) {
   
   # Set a random seed for reproducibility
   set.seed(1)
@@ -18,6 +18,8 @@ msea_ora_binomial_ci <- function(SIG, DET, ALL, M, probs = c(0.025, 0.975), num_
   P <- NULL
   P_range <- NULL
   
+  p <- length(SIG) / length(DET)
+  
   # Perform calculations for each pathway
   for (i in 1:length(M)) {
     
@@ -27,15 +29,19 @@ msea_ora_binomial_ci <- function(SIG, DET, ALL, M, probs = c(0.025, 0.975), num_
     l3 <- sum(SIG %in% M[[i]])   # Significant metabolites in the pathway
     
     # Directly use the proportion of significant metabolites among detected metabolites
-    r <- ifelse(l2 > 0, l3 / l2, 0)  # Proportion of significant metabolites
     n <- l1 - l2  # Number of undetected metabolites in the pathway
-
+    if (method == "naive") {
+      r <- if (l2 > 0) l3 / l2 else p
+    } else if (method == "weighted") { # weighted
+      r <- (l3 + n * p) / l1
+    } else if (method == "shrink"){
+      lambda <- 5
+      r <- if (l2 + lambda > 0) (l3 + lambda * p) / (l2 + lambda) else p
+    }
+    
     # Initial 2x2 table based on undetected metabolites
     a <- B$TAB[[i]][1,1]
     b <- B$TAB[[i]][1,2]
-    
-    # Overall proportion of significant metabolites
-    p <- length(SIG) / length(DET)
     
     # Overall count of non-significant metabolites
     c <- round(length(ALL) * p - a)
