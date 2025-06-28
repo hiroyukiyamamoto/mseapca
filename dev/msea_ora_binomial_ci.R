@@ -6,7 +6,7 @@
 
 source("C:/Users/hyama/Documents/R/msea/msea_ora.R")
 
-msea_ora_binomial_ci <- function(SIG, DET, ALL, M, method="naive", probs = c(0.025, 0.975), num_simulations = 1000) {
+msea_ora_binomial_ci <- function(SIG, DET, ALL, M, method="naive", probs = c(0.025, 0.975), num_simulations = 1000, lambda = 5) {
   
   # Set a random seed for reproducibility
   set.seed(1)

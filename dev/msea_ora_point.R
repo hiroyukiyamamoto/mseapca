@@ -2,7 +2,7 @@
 # This function performs an adjusted ORA that accounts for undetected metabolites in each pathway.
 # It builds upon the base ORA function and applies a correction based on estimated significance of undetected metabolites.
 
-msea_ora_point <- function(SIG, DET, ALL, M, method="naive") {
+msea_ora_point <- function(SIG, DET, ALL, M, method="naive", lambda = 5) {
   
   # Step 1: Label assignment for each metabolite group
   L1 <- setlabel(ALL, M) # All metabolites
@@ -34,7 +34,6 @@ msea_ora_point <- function(SIG, DET, ALL, M, method="naive") {
     } else if (method == "weighted") {
       r <- (l3 + n * p) / l1
     } else if (method == "shrink"){
-      lambda <- 5
       r <- if (l2 + lambda > 0) (l3 + lambda * p) / (l2 + lambda) else p
     }
     
