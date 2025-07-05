@@ -7,7 +7,7 @@ Authors@R: person(given = "Hiroyuki",
                   family = "Yamamoto",
                   role = c("aut", "cre"),
                   email = "h.yama2396@gmail.com")
-Description: Computing metabolite set enrichment analysis (MSEA) (Yamamoto, H. et al. (2014) <doi:10.1186/1471-2105-15-51>), single sample enrichment analysis (SSEA) (Yamamoto, H. (2023) <doi:10.51094/jxiv.262>) and over-representation analysis (ORA) that accounts for undetected metabolites (Yamamoto, H. (2024) <doi:10.51094/jxiv.954>).
+Description: Computing metabolite set enrichment analysis (MSEA) (Yamamoto, H. et al. (2014) <doi:10.1186/1471-2105-15-51>), single sample enrichment analysis (SSEA) (Yamamoto, H. (2023) <doi:10.51094/jxiv.484>) and over-representation analysis (ORA) that accounts for undetected metabolites (Yamamoto, H. (2024) <doi:10.51094/jxiv.954>).
 License: LGPL-3
 Encoding: UTF-8
 LazyData: true
