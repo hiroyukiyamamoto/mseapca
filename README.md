@@ -15,7 +15,7 @@ Metabolite set enrichment analysis for loadings
 
 **References**  
 [1] Yamamoto H. et al., BMC Bioinformatics, (2014) 15(1):51. doi: https://doi.org/10.1186/1471-2105-15-51  
-[2] Yamamoto H. , Jxiv, (2023). doi: https://doi.org/10.51094/jxiv.484 
+[2] Yamamoto H. , Jxiv, (2023). doi: https://doi.org/10.51094/jxiv.484  
 [3] Yamamoto H. , Jxiv, (2024). doi: https://doi.org/10.51094/jxiv.954
 
 ## Installation (in preparation)
