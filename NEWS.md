@@ -1,8 +1,14 @@
-## version 2.0.2
+## version 2.2.1
 
-- Released in November 5th, 2023.
+- Released in July 5th, 2025.
+- New functions `ora_all`, `ora_det`, `ora_est`, `ora_full` and `msea_ora_range` were added.
+- Added `fasting_mseapca` data for demonstration purposes.
+- Major modifications to the `msea_ora` function.
+- Minor modifications to the `setlabel` function.
+
+## version 2.1.1
+
 - `ssea_ora` was modified.
-- All R files are now ensured to be UTF-8 encoded.
 
 ## version 2.0.1
 

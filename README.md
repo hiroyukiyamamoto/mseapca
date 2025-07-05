@@ -1,6 +1,4 @@
 # mseapca
-<img src="sticker_mseapca.png" alt="mseapca sticker" width="250"/>
-
 Metabolite set enrichment analysis for loadings
 
 **mseapca**  provides functions for metabolite set enrichment analysis with loading in principal component anaysis and partial least squares, and single sample enrichment analysis.
@@ -11,11 +9,14 @@ Metabolite set enrichment analysis for loadings
 
 - The "ssea_ora" function can be used to compute single sample enrichment analysis based on over-representation analysis [2].
 
-- Our mseapca package can incorporate a metabolite set list from the PathBank database by referencing the AHPathbankDbs Bioconductor package or through user-generated lists.
+- The "msea_ora" function performs over-representation analysis while accounting for undetected metabolites [3].
+
+- The "msea_ora_range" function estimates the possible range of p-values under uncertainty caused by undetected metabolites [3].
 
 **References**  
 [1] Yamamoto H. et al., BMC Bioinformatics, (2014) 15(1):51. doi: https://doi.org/10.1186/1471-2105-15-51  
-[2] Yamamoto H. , Jxiv, (2023). doi: https://doi.org/10.51094/jxiv.484  
+[2] Yamamoto H. , Jxiv, (2023). doi: https://doi.org/10.51094/jxiv.484
+[3] Yamamoto H. , Jxiv, (2024). doi: https://doi.org/10.51094/jxiv.954
 
 ## Installation (in preparation)
 
