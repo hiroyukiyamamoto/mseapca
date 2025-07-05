@@ -1,4 +1,4 @@
-﻿list2xml <- function (filepath, M)
+list2xml <- function (filepath, M)
 {
   N <- XML::xmlNode("file", attrs = c(path = filepath))
   for (i in 1:length(M)) {

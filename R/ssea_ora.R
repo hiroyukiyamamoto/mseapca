@@ -1,4 +1,4 @@
-﻿ssea_ora <- function (det_list, det_all, M) 
+ssea_ora <- function (det_list, det_all, M) 
 {
   Z <- NULL
   for (i in 1:length(det_list)) {

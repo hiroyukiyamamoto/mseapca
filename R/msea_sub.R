@@ -1,4 +1,4 @@
-﻿msea_sub <-
+msea_sub <-
 function (M, D, y, maxiter=1000){
 
 # ---------------------
