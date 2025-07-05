@@ -66,4 +66,4 @@ P <- msea_sub(M,D,y, maxiter = 10) # iteration was set ato 10 for demonstration
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ htest }
+\keyword{ pca/msea }

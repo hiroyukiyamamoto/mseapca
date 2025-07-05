@@ -1,42 +1,52 @@
 \name{setlabel}
 \alias{setlabel}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{Generate binary label matrix of metabolite set}
 \description{
-This function generates binary label matrix of metabolite names and metabolite sets.
+This function generates binary label matrix of metabolites and metabolite sets.
 This is mainly used to be called by other functions, and used
 to count the number of metabolites in a specific metabolite set.
 }
 \usage{
-setlabel(M_ID, M)
+setlabel(MET, M)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{M_ID}{
-detected metabolites
-}
-  \item{M}{
-list of metabolite set and metabolite names
-}
-}
-\details{
-If single peak has multiple metabolite IDs in M_ID, split by "," or ";".
+  \item{MET}{A character vector of metabolites (e.g., detected or significant metabolites).}
+  \item{M}{A named list of metabolite sets, where each element is a character vector of metabolites.}
 }
 \value{
-binary label matrix of metabolite names in metabolite sets
+binary label matrix of metabolites in metabolite sets
+}
+\details{
+This function is used internally in various ORA methods (e.g., \code{ora_det}, \code{ora_all}, \code{ora_est}) to compute contingency tables for enrichment analysis.
 }
 \author{
 Hiroyuki Yamamoto
 }
 \examples{
+# Example
 data(fasting)
 data(pathway)
 
-M_ID <- colnames(fasting$X) # detected metabolites
+MET <- colnames(fasting$X) # detected metabolites
 M <- pathway$fasting # metabolite set list
 
-L <- setlabel(M_ID,M)	# binary label matrix
+# Fix for multiple annotations
+MET[MET == "UDP-glucose ; UDP-galactose"] <- "UDP-glucose"
+MET[MET == "trans-Glutaconic acid ; Itaconic acid"] <- "Itaconic acid"
+MET[MET == "Isonicotinamide ; Nicotinamide"] <- "Nicotinamide"
+MET[MET == "Isobutyric acid ; Butyric acid"] <- "Isobutyric acid"
+MET[MET == "GDP-mannose ; GDP-galactose"] <- "GDP-mannose"
+MET[MET == "ADP-glucose ; GDP-fucose"] <- "ADP-glucose"
+MET[MET == "1-Methylhistidine ; 3-Methylhistidine"] <- "3-Methylhistidine"
+
+L <- setlabel(MET, M)
+
+# Example 2
+data(fasting_mseapca)
+
+MET <- fasting_mseapca$DET
+M <- fasting_mseapca$pathway
+
+L <- setlabel(MET, M)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ manip }
+\keyword{utilities}

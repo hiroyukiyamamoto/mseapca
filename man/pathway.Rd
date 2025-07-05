@@ -1,9 +1,9 @@
 \name{pathway}
 \alias{pathway}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Example dataset for fasting and covid19 datasets}
+\title{Example of metabolite set list for fasting and covid19 datasets}
 \description{
-This data includes a metabolite set list and metabolite name list for fasting, and a metabolite set list for covid19 dataset within the "loadings" package
+This data includes metabolite set list for fasting and covid19 datasets in loadings package
 }
 \usage{
 data(pathway)
@@ -13,8 +13,6 @@ data(pathway)
 The list object pathway contains the following elements:
 
   fasting : 	metabolite set list for fasting mouse dataset
-
-  data$fasting : metabolite name list for fasting mouse dataset
 
   covid19$proteomics :   protein set list for covid19 dataset.
 }

@@ -24,32 +24,29 @@ pathbank2list(tbl_pathbank, subject, id)
 AHPathbankDbs needs to be installed separately.
 }
 \value{
-list of metabolite or protein set
+list of metabolite or protein set 
 }
 \author{
 Hiroyuki Yamamoto
 }
 \examples{
-\dontrun{
 ## PathBank
-library(AnnotationHub)
+#library(AnnotationHub)
+#ah <- AnnotationHub()
 
-ah <- AnnotationHub()
-qr <- query(ah, c("pathbank", "Homo sapiens"))
+#qr <- query(ah, c("pathbank", "Homo sapiens"))
 
-#tbl_pathbank <- qr[[1]] # metabolomics
-tbl_pathbank <- qr[[2]] # proteomics
+##tbl_pathbank <- qr[[1]] # metabolomics
+#tbl_pathbank <- qr[[2]] # proteomics
 
-ids <- names(tbl_pathbank)[-c(1:4)]
-id <- ids[1] # Uniprot ID
+#ids <- names(tbl_pathbank)[-c(1:4)]
+#id <- ids[1] # Uniprot ID
 
-subs <- unique(tbl_pathbank$`Pathway Subject`)
-subject <- subs[6] # Protein
+#subs <- unique(tbl_pathbank$`Pathway Subject`)
+#subject <- subs[6] # Protein
 
-M <- pathbank2list(tbl_pathbank, subject, id)
+# M <- pathbank2list(tbl_pathbank, subject, id)
 }
-}
-
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ manip }
+\keyword{ list }
