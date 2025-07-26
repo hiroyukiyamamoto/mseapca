@@ -32,3 +32,11 @@ The latest development version can be installed from GitHub:
 # install.packages("devtools")
 devtools::install_github("hiroyukiyamamoto/mseapca")
 ```
+
+## Note on ora_est() function
+
+The current ora_est() function in the main branch contains a known bug when calculating enrichment under certain conditions (e.g., when accounting for undetected metabolites).
+
+A fixed version is available in the development directory on GitHub:
+dev/ora_est.R
+We recommend using this version until the fix is included in the next CRAN release.
