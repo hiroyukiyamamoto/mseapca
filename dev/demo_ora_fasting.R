@@ -10,7 +10,7 @@ DET <- fasting_mseapca$DET 		# DET:検出された物質
 M <- fasting_mseapca$pathway 	# M :パスウェイデータ
 
 B1 <- msea_ora(SIG, DET, M, option = "det") # 検出された物質のみ
-B2 <- msea_ora(SIG, DET, M, option = "est_naive")
+#B2 <- msea_ora(SIG, DET, M, option = "est_naive")
 B2 <- ora_est(SIG, DET, M) # 修正版
 
 B3 <- msea_ora_range(SIG, DET, M, option = "bino_naive", nsim=1000)
@@ -128,9 +128,35 @@ b7 <- B7[[1]]$p.value
 
 # ----------------------------------------------------
 
-B <- cbind(b1,b2,b3,b4,b5,b6,b7)
+# 有意かつ検出された数 a、非有意かつ検出された数 b をパスウェイごとに抽出
+r_vec <- c()
+n_vec <- c()
+for (tab in tables) {
+  a <- tab[1, 1]
+  b <- tab[1, 2]
+  n <- a + b
+  if (n > 0) {
+    r <- a / n
+    r_vec <- c(r_vec, r)
+    n_vec <- c(n_vec, n)
+  }
+}
 
-colnames(B) <- c("det","est_naive","bino_naive","est_weighted","est_shrink","est_ebayes", "adaptive")
+# 経験ベイズによる α の推定（lambda を経由しない）
+p_bar <- mean(r_vec)
+s2 <- var(r_vec)
+n_bar <- mean(n_vec)
+
+alpha_hat <- max(0, (p_bar * (1 - p_bar)) / (s2 - p_bar * (1 - p_bar) / n_bar))
+
+B8 <- ora_est_adaptive_fisher(SIG, DET, M, alpha = alpha_hat)
+b8 <- B8[[1]]$p.value
+
+# ----------------------------------------------------
+
+B <- cbind(b1,b2,b3,b4,b5,b6,b7,b8)
+
+colnames(B) <- c("det","est_naive","bino_naive","est_weighted","est_shrink","est_ebayes", "adaptive", "adaptive_hat")
 
 write.csv(B, file="C:/R/B.csv")
 
