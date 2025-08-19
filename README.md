@@ -3,6 +3,8 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/mseapca)](https://cran.r-project.org/package=mseapca)
 [![Support ? Suzuri Shop](https://img.shields.io/badge/Support-Suzuri%20Shop-blue)](https://suzuri.jp/EigenStudio/18422952/heavyweight-t-shirt/l/white)
 
+<img src="sticker_mseapca.png" alt="loadings sticker" width="250"/>
+
 Metabolite set enrichment analysis for loadings
 
 **mseapca**  provides functions for metabolite set enrichment analysis with loading in principal component anaysis and partial least squares, and single sample enrichment analysis.
@@ -44,4 +46,5 @@ The current ora_est() function in the main branch contains a known bug when calc
 A fixed version is available in the development directory on GitHub:
 dev/ora_est.R
 We recommend using this version until the fix is included in the next CRAN release.
+
 
