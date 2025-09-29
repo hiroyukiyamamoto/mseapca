@@ -16,7 +16,13 @@ est_lam <- function(k, n, m0 = NULL, method = "fct2", Kmin = 3) {
 }
 
 ### demo
+## フィッシャー正確確率検定
 #m0 <- length(SIG)/length(DET)
 #lam <- est_lam(k0, n0, m0)
 #B <- ora_est(SIG, DET, M, method="shrink", lambda=lam)
 #sum(B$`Result of MSEA (ORA with adjustment)`[,1]<0.05)
+
+## ベイズ事後確率
+#a_post <- lam * m0 + k0
+#b_post <- lam * (1 - m0) + (n0 - k0)
+#post_enrich <- 1 - pbeta(m0, a_post, b_post) ## 3)
